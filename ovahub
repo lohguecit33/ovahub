@@ -168,10 +168,7 @@ local function CheckQuest()
     if World1 then
         if MyLevel >= 1 and MyLevel <= 120 then
             Mon = "Sky Bandit"
-            LevelQuest = 1
-            NameQuest = "SkyQuest"
             NameMon = "Sky Bandit"
-            CFrameQuest = CFrame.new(-4839.53027, 716.368591, -2619.44165, 0.866007268, 0, 0.500031412, 0, 1, 0, -0.500031412, 0, 0.866007268)
             CFrameMon = CFrame.new(-4953.20703125, 295.74420166015625, -2899.22900390625)
         elseif MyLevel == 120 or MyLevel <= 149 then
             Mon = "Chief Petty Officer"
