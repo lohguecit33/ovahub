@@ -127,6 +127,77 @@ elseif placeId == 7449423635 then
     showWorldNotification("World 3")  -- แจ้งเตือนสำหรับโลกที่ 3
 end
 
+-- Auto Farm mode khusus untuk fase awal
+spawn(function()
+    while wait() do
+        if FarmMode == "No Quest" and _G.AutoFarm then
+            pcall(function()
+                CheckQuest()
+                
+                if game:GetService("Workspace").Enemies:FindFirstChild(Mon) then
+                    for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                        if v.Name == Mon then
+                            repeat task.wait()
+                                EquipWeapon(_G.SelectWeapon)
+                                AutoHaki()
+                                PosMon = v.HumanoidRootPart.CFrame
+                                ATween(v.HumanoidRootPart.CFrame * CFrame.new(0, 30, 0)) -- Posisi lebih agresif
+                                v.HumanoidRootPart.CanCollide = false
+                                v.Humanoid.WalkSpeed = 0
+                                v.Head.CanCollide = false
+                                v.HumanoidRootPart.Size = Vector3.new(80,80,80)
+                                game:GetService'VirtualUser':CaptureController()
+                                game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
+                            until not _G.AutoFarm or v.Humanoid.Health <= 0
+                        end
+                    end
+                else
+                    ATween(CFrameMon)
+                end
+            end)
+        end
+    end
+end)
+
+-- Sistem monitoring level
+spawn(function()
+    while wait(5) do
+        if game:GetService("Players").LocalPlayer.Data.Level.Value > 120 then
+            FarmMode = "Quest"
+            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
+            break
+        end
+    end
+end)
+
+-- [Pertahankan semua fungsi pendukung lainnya seperti]
+-- Tween functions
+-- Combat mechanics
+-- Auto Haki
+-- Skill management
+-- Dan sistem lainnya yang sudah ada
+
+-- Inisialisasi awal
+FarmMode = "No Quest"
+_G.AutoFarm = true
+_G.BringMode = 300  -- Adjust untuk mob density
+_G.SelectWeapon = "Melee"  -- Pilih senjata awal
+
+-- Optimasi performa
+spawn(function()
+    while wait() do
+        if FarmMode == "No Quest" then
+            setfpscap(240)
+            -- Matikan efek visual tidak penting
+            for _,v in pairs(game:GetService("Workspace").Effects:GetChildren()) do
+                if v:IsA("Part") or v:IsA("MeshPart") then
+                    v.Transparency = 1
+                end
+            end
+        end
+    end
+end)
+
 spawn(function()
 		pcall(function()
 			while wait() do
