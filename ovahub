@@ -2,6 +2,35 @@
 local player = game:GetService("Players").LocalPlayer
 local data = player:WaitForChild("Data")
 
+if not game:IsLoaded() then game.Loaded:Wait() end
+
+repeat task.wait() until game.Players.LocalPlayer.PlayerGui.Main:FindFirstChild("ChooseTeam") or game.Players.LocalPlayer.Team ~= nil;
+
+print("--[[Join Team]]--")
+
+do -- Team Script
+	repeat 
+		ChooseTeam = game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("ChooseTeam",true)
+		UIController = game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("UIController",true)
+		if UIController and ChooseTeam then
+			if ChooseTeam.Visible then
+				for i,v in pairs(getgc()) do
+					if type(v) == "function" and getfenv(v).script == UIController then
+						local constant = getconstants(v)
+						pcall(function()
+							if constant[1] == "Pirates" and #constant == 1 then
+								v(getgenv().Team or "Pirates")
+							end
+						end)
+					end
+				end
+			end
+		end
+		wait(1)
+	until game.Players.LocalPlayer.Team
+	repeat wait() until game.Players.LocalPlayer.Character
+end
+
 -- สร้าง Screen GUI
 local screenGui = Instance.new("ScreenGui")
 screenGui.Parent = player:WaitForChild("PlayerGui")
