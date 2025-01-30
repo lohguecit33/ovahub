@@ -1,29 +1,3 @@
--- Configuration Variables
-_G.AutoFarm = true
-_G.AutoPlayerHunter = false
-_G.AutoRengoku = false
-_G.AutoElectricClaw = true
-_G.AutoDragonTalon = true
-_G.AutoBuyChip = true
-_G.AutoBuyLegendarySword = false
-_G.AutoDoughtBoss = true
-_G.AutoSelectDungeon = true
-_G.Kill_Aura = true
-_G.AutoSuperhuman = true
-_G.AutoFarmFruitMastery = true
-_G.AutoFarmGunMastery = true
-_G.AutoBringFruit = true
-_G.AutoStoreSsFruit = true
-_G.Remove_trct = true
-_G.RemoveHit = true
-_G.BuyAllAib = false
-_G.BuyAllSword = false
-_G.AutoStartRaid = true
-_G.AutoDungeon = true
-_G.AutoSecondSea = true
-_G.AutoThirdSea = true
-_G.XERUNKAITUN = true
-
 -- ดึงค่าข้อมูลจาก LocalPlayer
 local player = game:GetService("Players").LocalPlayer
 local data = player:WaitForChild("Data")
