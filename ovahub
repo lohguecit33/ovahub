@@ -140,6 +140,8 @@ spawn(function()
                             repeat task.wait()
                                 EquipWeapon(_G.SelectWeapon)
                                 AutoHaki()
+                                Kill_Aura
+                                BringMonster
                                 PosMon = v.HumanoidRootPart.CFrame
                                 ATween(v.HumanoidRootPart.CFrame * CFrame.new(0, 30, 0)) -- Posisi lebih agresif
                                 v.HumanoidRootPart.CanCollide = false
@@ -169,13 +171,6 @@ spawn(function()
         end
     end
 end)
-
--- [Pertahankan semua fungsi pendukung lainnya seperti]
--- Tween functions
--- Combat mechanics
--- Auto Haki
--- Skill management
--- Dan sistem lainnya yang sudah ada
 
 -- Inisialisasi awal
 FarmMode = "No Quest"
@@ -3845,3 +3840,5 @@ spawn(function()
 		end)
 	end)
 StopTween(_G.Auto_Dungeon)
+
+ 
