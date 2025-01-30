@@ -183,21 +183,6 @@ _G.AutoFarm = true
 _G.BringMode = 300  -- Adjust untuk mob density
 _G.SelectWeapon = "Melee"  -- Pilih senjata awal
 
--- Optimasi performa
-spawn(function()
-    while wait() do
-        if FarmMode == "No Quest" then
-            setfpscap(240)
-            -- Matikan efek visual tidak penting
-            for _,v in pairs(game:GetService("Workspace").Effects:GetChildren()) do
-                if v:IsA("Part") or v:IsA("MeshPart") then
-                    v.Transparency = 1
-                end
-            end
-        end
-    end
-end)
-
 spawn(function()
 		pcall(function()
 			while wait() do
