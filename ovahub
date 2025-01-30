@@ -3840,5 +3840,3 @@ spawn(function()
 		end)
 	end)
 StopTween(_G.Auto_Dungeon)
-
- 
