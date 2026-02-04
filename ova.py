@@ -47,34 +47,40 @@ def log(msg):
 # =========================
 # WEBHOOK DISCORD
 # =========================
-def escape_json_string(s):
-    """Escape string untuk JSON"""
-    s = str(s)
-    s = s.replace('\\', '\\\\')
-    s = s.replace('"', '\\"')
-    s = s.replace('\n', '\\n')
-    s = s.replace('\r', '\\r')
-    s = s.replace('\t', '\\t')
-    return s
-
 def send_discord_webhook(webhook_url, title, message, color=None):
-    """Kirim pesan ke Discord webhook"""
+    """Kirim pesan ke Discord webhook - IMPROVED VERSION"""
     if not webhook_url or webhook_url == "":
-        return
+        return False
     
-    color = color or 16711680  # Red default
-    payload = '{"embeds":[{"title":"%s","description":"%s","color":%d,"timestamp":"%s"}]}' % (
-        escape_json_string(title),
-        escape_json_string(message),
-        color,
-        time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
-    )
-    
-    cmd = 'curl -s -X POST -H "Content-Type: application/json" -d \'%s\' "%s" 2>/dev/null' % (
-        payload,
-        webhook_url
-    )
-    os.system(cmd)
+    try:
+        color = color or 16711680  # Red default
+        
+        # Build JSON payload dengan escaping yang benar
+        payload = {
+            "embeds": [{
+                "title": str(title),
+                "description": str(message),
+                "color": int(color),
+                "timestamp": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+            }]
+        }
+        
+        # Convert ke JSON string
+        payload_str = json.dumps(payload)
+        
+        # Escape single quotes untuk shell command
+        payload_escaped = payload_str.replace("'", "'\"'\"'")
+        
+        # Build curl command
+        cmd = f"curl -s -X POST -H 'Content-Type: application/json' -d '{payload_escaped}' '{webhook_url}'"
+        
+        # Execute command
+        result = os.system(cmd)
+        
+        return result == 0
+    except Exception as e:
+        log(f"Webhook error: {e}")
+        return False
 
 def get_cpu_usage():
     """Mendapatkan CPU usage dalam persen - LAZY MODE (hanya saat dipanggil)"""
@@ -128,10 +134,13 @@ def build_webhook_status_message(pkgs, cfg):
     cpu = get_cpu_usage()  # Hanya dipanggil saat webhook
     ram = get_ram_usage()  # Hanya dipanggil saat webhook
     
-    message = f"**📊 System Status**\\n"
-    message += f"CPU: {cpu}%\\n"
-    message += f"RAM: {ram}%\\n"
-    message += f"\\n**👥 Account Status**\\n"
+    # Build message dengan format yang bersih
+    lines = []
+    lines.append("**📊 System Status**")
+    lines.append(f"CPU: {cpu}%")
+    lines.append(f"RAM: {ram}%")
+    lines.append("")
+    lines.append("**👥 Account Status**")
     
     for pkg, info in pkgs.items():
         username = info["username"]
@@ -146,9 +155,9 @@ def build_webhook_status_message(pkgs, cfg):
         else:
             status_emoji = "❌"
         
-        message += f"{status_emoji} {username}: {status.upper()}\\n"
+        lines.append(f"{status_emoji} {username}: {status.upper()}")
     
-    return message
+    return "\n".join(lines)
 
 # =========================
 # CONFIG
@@ -1182,6 +1191,7 @@ def menu():
         print("9. 📊 View Cache Folder Status")
         print("-" * 40)
         print("T. 🧪 Test Workspace Detection")
+        print("W. 📡 Test Webhook")
         print("0. ❌ Exit\n")
         
         c = input("📌 Select: ").strip()
@@ -1243,6 +1253,36 @@ def menu():
                 for pkg, info in pkgs.items():
                     timestamp = get_json_timestamp(info, info["username"], cfg)
                     print(f"{info['username']}: {timestamp}")
+                input("\nPress ENTER...")
+        elif c.lower() == "w":
+            # Test webhook
+            clear_screen()
+            print("=" * 70)
+            print("📡 TEST WEBHOOK")
+            print("=" * 70)
+            
+            if not cfg.get("webhook_url", ""):
+                log("❌ Webhook URL not configured!")
+                input("\nPress ENTER...")
+            else:
+                log(f"Testing webhook: {cfg['webhook_url'][:50]}...")
+                
+                test_message = "**🧪 Test Message**\n"
+                test_message += f"Timestamp: {time.strftime('%Y-%m-%d %H:%M:%S')}\n"
+                test_message += "This is a test webhook from Roblox Manager."
+                
+                result = send_discord_webhook(
+                    cfg["webhook_url"],
+                    "🧪 Webhook Test",
+                    test_message,
+                    3447003  # Blue
+                )
+                
+                if result:
+                    log("✅ Webhook sent successfully!")
+                else:
+                    log("❌ Webhook failed to send!")
+                
                 input("\nPress ENTER...")
         elif c == "0": 
             break
