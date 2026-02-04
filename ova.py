@@ -273,30 +273,19 @@ def start_app(package, game_id):
     log(f"Started {package}")
 
 # =========================
-# LICENSE KEY MANAGEMENT - DIPERBAIKI
+# CACHE FOLDER MANAGEMENT
 # =========================
 def find_cache_dir(package_name):
-    """Mencari folder Cache yang ada untuk package tertentu"""
+    """Cari folder Cache untuk package tertentu"""
     possible_paths = [
         f"/storage/emulated/0/Android/data/{package_name}/files/gloop/external/Internals/Cache",
         f"/sdcard/Android/data/{package_name}/files/gloop/external/Internals/Cache",
-        f"/storage/sdcard/Android/data/{package_name}/files/gloop/external/Internals/Cache",
-        f"/mnt/sdcard/Android/data/{package_name}/files/gloop/external/Internals/Cache",
     ]
     
-    for path in possible_paths:
-        if os.path.isdir(path):  # PERBAIKAN: gunakan isdir untuk folder
-            return path
-    
-    return None
-
-def check_license_exists(package_info):
-    """Cek apakah file license ada untuk package tertentu"""
-    package_name = package_info.get("package_name", "com.roblox.client")
-    cache_dir = find_cache_dir(package_name)
-    
-    if cache_dir:
-        # Cek apakah ada file di dalam folder Cache
+    for cache_dir in possible_paths:
+        if not os.path.isdir(cache_dir):
+            continue
+        
         try:
             files = os.listdir(cache_dir)
             if files:
@@ -506,46 +495,51 @@ def view_license_status():
         input("\nPress ENTER...")
         return
     
+    print(f"\n{'No.':<4} {'Username':<20} {'Cache Status':<15} {'File Count':<12}")
+    print("-" * 70)
+    
     for i, (pkg, info) in enumerate(pkgs.items(), 1):
         username = info['username']
         cache_dir = find_cache_dir(pkg)
         
-        print(f"\n{i}. {username} ({pkg})")
-        
         if cache_dir:
-            print(f"   ✅ Cache folder: {cache_dir}")
             try:
                 files = os.listdir(cache_dir)
-                print(f"   📄 Files: {len(files)}")
-                for f in files[:3]:
-                    print(f"      - {f}")
-                if len(files) > 3:
-                    print(f"      ... and {len(files) - 3} more")
-            except Exception as e:
-                print(f"   ⚠️ Error reading: {e}")
+                file_count = len(files)
+                status = "✅ Found"
+                count_str = str(file_count)
+            except:
+                status = "⚠️ Error"
+                count_str = "N/A"
         else:
-            print(f"   ❌ No cache folder found")
+            status = "❌ Not Found"
+            count_str = "0"
+        
+        print(f"{i:<4} {username:<20} {status:<15} {count_str:<12}")
     
-    print("\n" + "=" * 70)
-    input("Press ENTER...")
+    print("=" * 70)
+    input("\nPress ENTER...")
 
 # =========================
 # SCRIPT MANAGEMENT
 # =========================
 def list_executor_scripts(package_info):
-    """List semua script di autoexec folder"""
+    """Mendapatkan daftar script untuk paket tertentu"""
     autoexec_dir = package_info.get("autoexec_dir", "")
+    
     if not autoexec_dir or not os.path.exists(autoexec_dir):
         return []
     
     try:
-        files = [f for f in os.listdir(autoexec_dir) if f.endswith('.lua') or f.endswith('.txt')]
-        return files
+        return [
+            f for f in os.listdir(autoexec_dir)
+            if f.endswith((".lua", ".txt"))
+        ]
     except:
         return []
 
 def add_script_to_all_packages():
-    """Tambah script ke semua package"""
+    """Menambahkan script ke semua paket"""
     clear_screen()
     print("=" * 70)
     print("📝 ADD SCRIPT TO ALL PACKAGES")
@@ -557,45 +551,57 @@ def add_script_to_all_packages():
         input("\nPress ENTER...")
         return
     
-    # Input script name
-    script_name = input("\n📌 Script filename (e.g. script.lua): ").strip()
-    if not script_name:
-        log("Cancelled")
-        input("\nPress ENTER...")
-        return
+    print(f"\nFound {len(pkgs)} packages:")
+    for i, (pkg, info) in enumerate(pkgs.items(), 1):
+        print(f"  {i}. {info['username']}")
     
-    # Input script content
-    print("\n📝 Enter script content (type 'END' on new line to finish):")
+    print("\n" + "-" * 70)
+    print("Paste script content (press ENTER twice to finish):")
+    
     lines = []
+    empty_count = 0
+    
     while True:
-        line = input()
-        if line == "END":
+        try:
+            line = input()
+        except (EOFError, KeyboardInterrupt):
+            print()
             break
-        lines.append(line)
+        
+        if line == "":
+            empty_count += 1
+            if empty_count >= 2:
+                break
+        else:
+            empty_count = 0
+            lines.append(line)
     
-    script_content = "\n".join(lines)
+    script_content = "\n".join(lines).strip()
     
-    if not script_content.strip():
+    if not script_content:
         log("Empty script, cancelled")
         input("\nPress ENTER...")
         return
     
-    # Konfirmasi
-    print(f"\n📄 Script: {script_name}")
-    print(f"📏 Length: {len(script_content)} chars")
-    confirm = input("\n⚠️ Add to ALL packages? (y/n): ").strip().lower()
-    
-    if confirm != 'y':
-        log("Cancelled")
+    script_name = input("\n📌 Script name (without .lua): ").strip()
+    if not script_name:
+        log("Invalid script name")
         input("\nPress ENTER...")
         return
     
-    # Add ke semua package
+    if not script_name.endswith(".lua"):
+        script_name += ".lua"
+    
+    print("\n" + "=" * 70)
+    log("Adding script to all packages...")
+    print("=" * 70)
+    
     success_count = 0
     failed_count = 0
     
     for pkg, info in pkgs.items():
         autoexec_dir = info.get("autoexec_dir", "")
+        
         if not autoexec_dir:
             log(f"❌ {info['username']}: No autoexec dir")
             failed_count += 1
@@ -722,26 +728,87 @@ def view_scripts_all_packages():
     input("Press ENTER...")
 
 # =========================
-# WORKSPACE MONITORING
+# WORKSPACE MONITORING - PERBAIKAN DI SINI
 # =========================
-def get_json_timestamp(package_info, username, cfg):
-    """Baca timestamp dari JSON file workspace"""
-    workspace_dir = package_info.get("workspace_dir", "")
-    json_file = workspace_dir + "/" + username + cfg["json_suffix"]
+def get_workspace_json_path(package_info, username, cfg):
+    """Mendapatkan path workspace JSON untuk paket tertentu - DIPERBAIKI"""
+    workspace_dir = package_info.get("workspace_dir", 
+                     f"/storage/emulated/0/Android/data/com.roblox.client/files/gloop/external/Workspace")
     
-    if not os.path.exists(json_file):
+    # Buat direktori jika belum ada
+    os.makedirs(workspace_dir, exist_ok=True)
+    
+    return f"{workspace_dir}/{username}{cfg['json_suffix']}"
+
+def get_json_timestamp(package_info, username, cfg):
+    """Baca timestamp dari JSON file workspace - DIPERBAIKI DENGAN MULTI-FIELD SUPPORT"""
+    json_path = get_workspace_json_path(package_info, username, cfg)
+    
+    # Cek apakah file ada
+    if not os.path.exists(json_path):
         return None
     
     try:
-        with open(json_file) as f:
+        # Baca timestamp dari file
+        with open(json_path, 'r') as f:
             data = json.load(f)
-            return data.get("timestamp")
-    except:
+        
+        # Cari field timestamp - coba berbagai kemungkinan nama field
+        timestamp_field = None
+        for field in ["timestamp", "time", "last_update", "updated_at"]:
+            if field in data:
+                timestamp_field = data[field]
+                break
+        
+        if timestamp_field:
+            return timestamp_field
+        else:
+            # Gunakan waktu modifikasi file sebagai fallback
+            return os.path.getmtime(json_path)
+    except Exception as e:
+        log(f"Error reading JSON for {username}: {e}")
+        return None
+
+def parse_timestamp(timestamp):
+    """Parse timestamp dari berbagai format - DIPERBAIKI"""
+    try:
+        if isinstance(timestamp, (int, float)):
+            return timestamp
+        
+        # Coba format ISO (2026-02-04T18:08:15Z)
+        if "T" in timestamp and "Z" in timestamp:
+            dt_str = timestamp.replace("Z", "+00:00")
+            dt = datetime.fromisoformat(dt_str)
+            return dt.timestamp()
+        
+        # Coba format dengan timezone
+        if "T" in timestamp and ("+" in timestamp or timestamp.count("-") == 2):
+            dt = datetime.fromisoformat(timestamp)
+            return dt.timestamp()
+        
+        # Coba format standar
+        try:
+            dt = datetime.strptime(timestamp, "%Y-%m-%d %H:%M:%S")
+            return dt.timestamp()
+        except ValueError:
+            pass
+        
+        # Coba format lain
+        for fmt in ["%Y-%m-%dT%H:%M:%S", "%Y/%m/%d %H:%M:%S", "%d-%m-%Y %H:%M:%S"]:
+            try:
+                dt = datetime.strptime(timestamp, fmt)
+                return dt.timestamp()
+            except ValueError:
+                continue
+        
+        return None
+        
+    except Exception as e:
         return None
 
 def check_workspace_status(package, package_info, cfg):
     """
-    Cek status workspace dari timestamp JSON
+    Cek status workspace dari timestamp JSON - DIPERBAIKI
     Returns: online/waiting/stale/offline
     """
     username = package_info["username"]
@@ -751,19 +818,25 @@ def check_workspace_status(package, package_info, cfg):
         return "offline"
     
     # Cek timestamp
-    ts = get_json_timestamp(package_info, username, cfg)
-    if ts is None:
+    timestamp = get_json_timestamp(package_info, username, cfg)
+    if timestamp is None:
         return "waiting"
     
-    age = time.time() - ts
+    # Parse timestamp
+    json_time = parse_timestamp(timestamp)
+    if json_time is None:
+        return "waiting"
     
-    if age < cfg["workspace_timeout"]:
+    current_time = time.time()
+    time_diff = current_time - json_time
+    
+    if time_diff <= cfg["workspace_timeout"]:
         return "online"
     else:
         return "stale"
 
 def wait_for_workspace(package, package_info, cfg, max_wait=None):
-    """Tunggu sampai workspace online"""
+    """Tunggu sampai workspace online - DIPERBAIKI"""
     if max_wait is None:
         max_wait = cfg["workspace_timeout"]
     
@@ -771,8 +844,14 @@ def wait_for_workspace(package, package_info, cfg, max_wait=None):
     log(f"Waiting for workspace: {username}")
     
     start = time.time()
+    last_status = None
+    
     while (time.time() - start) < max_wait:
         status = check_workspace_status(package, package_info, cfg)
+        
+        if status != last_status:
+            log(f"Status {username}: {status}")
+            last_status = status
         
         if status == "online":
             log(f"{username} is online!")
@@ -838,20 +917,22 @@ def sequential_startup(pkgs, cfg):
     return success_count
 
 def restart_all_roblox(pkgs, cfg):
-    """Restart semua package Roblox"""
-    log("🔄 RESTARTING ALL ROBLOX PACKAGES")
+    """Restart semua Roblox package"""
+    log("=" * 60)
+    log("RESTARTING ALL ROBLOX PACKAGES")
+    log("=" * 60)
     
     # Stop semua
     for pkg, info in pkgs.items():
         if is_app_running(pkg):
+            log(f"Stopping {info['username']}")
             stop_app(pkg)
     
-    time.sleep(cfg["restart_delay"])
+    log("Waiting before restart...")
+    time.sleep(cfg["restart_delay"] * 2)
     
-    # Start semua
-    for pkg, info in pkgs.items():
-        start_app(pkg, cfg["game_id"])
-        time.sleep(2)  # Delay antar start
+    # Start semua sequential
+    return sequential_startup(pkgs, cfg)
 
 # =========================
 # MONITOR WITH TABLE
@@ -920,47 +1001,6 @@ def monitor():
         input("Enter...")
         return
     
-    # Tanya webhook settings
-    webhook_choice = input("📡 Send webhook? (y/n, default=y): ").strip().lower()
-    if webhook_choice == "" or webhook_choice == "y":
-        cfg["webhook_enabled"] = True
-        
-        if not cfg.get("webhook_url", ""):
-            webhook_url = input("🔗 Discord webhook URL: ").strip()
-            cfg["webhook_url"] = webhook_url
-            save_config(cfg)
-        
-        webhook_interval = input("⏱️ Webhook interval in minutes (default=10): ").strip()
-        if webhook_interval:
-            try:
-                cfg["webhook_interval"] = int(webhook_interval)
-            except:
-                cfg["webhook_interval"] = 10
-        else:
-            cfg["webhook_interval"] = 10
-        
-        restart_interval = input("🔄 Restart interval in minutes (0=disabled, default=0): ").strip()
-        if restart_interval:
-            try:
-                cfg["restart_interval"] = int(restart_interval)
-            except:
-                cfg["restart_interval"] = 0
-        else:
-            cfg["restart_interval"] = 0
-        
-        save_config(cfg)
-        
-        log(f"✅ Webhook enabled - every {cfg['webhook_interval']} minutes")
-        if cfg["restart_interval"] > 0:
-            log(f"✅ Auto restart enabled - every {cfg['restart_interval']} minutes")
-        else:
-            log("ℹ️ Auto restart disabled")
-    else:
-        cfg["webhook_enabled"] = False
-        log("ℹ️ Webhook disabled")
-    
-    time.sleep(2)
-    
     monitor_active = True
     
     # Sequential startup
@@ -979,7 +1019,7 @@ def monitor():
     log(f"\n{online_count} accounts online, starting monitor...")
     time.sleep(3)
     
-    # Send initial webhook
+    # Send startup webhook
     if cfg.get("webhook_enabled", False) and cfg.get("webhook_url", ""):
         message = build_webhook_status_message(pkgs, cfg)
         send_discord_webhook(
