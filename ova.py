@@ -47,137 +47,155 @@ def log(msg):
     sys.stdout.flush()
 
 # =========================
-# WEBHOOK DISCORD
+# CPU & RAM MONITORING - IMPROVED VERSION
 # =========================
-def get_cpu_usage_termux():
-    """
-    Mendapatkan CPU usage untuk Termux/Cloudphone
-    Menggunakan berbagai fallback method
-    """
+def get_cpu_count():
+    """Mendapatkan jumlah CPU cores"""
     try:
-        # Method 1: Coba baca /proc/loadavg untuk load average
-        try:
-            with open('/proc/loadavg', 'r') as f:
-                load_avg = f.read().strip().split()
-                # Load average 1 menit dibagi jumlah CPU core
-                load_1min = float(load_avg[0])
-                
-                # Hitung jumlah CPU cores
-                cpu_count = os.cpu_count() or 4
-                
-                # Konversi load average ke persentase (approx)
-                # Load average 1.0 per core = 100% usage
-                cpu_percent = min(100, (load_1min / cpu_count) * 100)
-                
-                if cpu_percent > 0:
-                    return round(cpu_percent, 1)
-        except:
-            pass
+        # Method 1: os.cpu_count()
+        cpu_count = os.cpu_count()
+        if cpu_count:
+            return cpu_count
         
-        # Method 2: Gunakan 'top' command
-        try:
-            result = subprocess.run(
-                ['top', '-bn1'],
-                capture_output=True,
-                text=True,
-                timeout=2
-            )
-            
-            # Parse output top
-            lines = result.stdout.split('\n')
-            for line in lines:
-                if 'Cpu' in line or 'CPU' in line:
-                    # Parse format: "%Cpu(s):  0.3 us,  0.7 sy,  0.0 ni, 99.0 id"
-                    parts = line.split(',')
-                    for part in parts:
-                        if 'id' in part:  # idle percentage
-                            idle = float(part.split()[0])
-                            cpu_usage = 100 - idle
-                            if cpu_usage > 0:
-                                return round(cpu_usage, 1)
-        except:
-            pass
+        # Method 2: Baca dari /proc/cpuinfo
+        with open('/proc/cpuinfo', 'r') as f:
+            cpu_count = len([line for line in f if line.startswith('processor')])
+            if cpu_count > 0:
+                return cpu_count
         
-        # Method 3: Gunakan ps untuk hitung CPU dari proses Roblox
-        try:
-            result = subprocess.run(
-                ['ps', '-eo', 'comm,pcpu'],
-                capture_output=True,
-                text=True,
-                timeout=2
-            )
-            
-            total_cpu = 0
-            lines = result.stdout.strip().split('\n')[1:]  # Skip header
-            
-            for line in lines:
-                parts = line.split()
-                if len(parts) >= 2 and 'roblox' in parts[0].lower():
-                    try:
-                        cpu = float(parts[-1])
-                        total_cpu += cpu
-                    except:
-                        pass
-            
-            if total_cpu > 0:
-                return round(min(100, total_cpu), 1)
-        except:
-            pass
-        
-        # Method 4: Estimasi berdasarkan jumlah proses Roblox yang running
-        try:
-            result = subprocess.run(
-                ['pgrep', '-f', 'com.roblox'],
-                capture_output=True,
-                text=True,
-                timeout=2
-            )
-            
-            roblox_processes = len(result.stdout.strip().split('\n'))
-            if roblox_processes > 0:
-                # Estimasi: setiap Roblox proses ~ 15-20% CPU
-                estimated_cpu = min(100, roblox_processes * 18)
-                return round(estimated_cpu, 1)
-        except:
-            pass
-        
-        # Fallback: Return "N/A" indicator
-        return -1
-        
-    except Exception as e:
-        log(f"CPU detection error: {e}")
-        return -1
+        # Fallback
+        return 4
+    except:
+        return 4
 
-def get_cpu_usage():
-    """Wrapper untuk CPU usage dengan fallback"""
-    cpu = get_cpu_usage_termux()
-    if cpu < 0:
-        return "N/A"
-    return cpu
-
-def get_ram_usage():
-    """Mendapatkan RAM usage dalam persen"""
+def get_ram_info():
+    """Mendapatkan informasi RAM total dan tersedia (dalam MB)"""
     try:
         with open('/proc/meminfo', 'r') as f:
             lines = f.readlines()
         
-        mem_total = 0
-        mem_available = 0
+        mem_total_kb = 0
+        mem_available_kb = 0
         
         for line in lines:
             if line.startswith('MemTotal:'):
-                mem_total = int(line.split()[1])
+                mem_total_kb = int(line.split()[1])
             elif line.startswith('MemAvailable:'):
-                mem_available = int(line.split()[1])
+                mem_available_kb = int(line.split()[1])
         
-        if mem_total > 0:
-            usage = 100.0 * (1.0 - mem_available / mem_total)
-            return round(usage, 1)
-        return 0
+        # Konversi KB ke MB
+        mem_total_mb = mem_total_kb / 1024
+        mem_available_mb = mem_available_kb / 1024
+        mem_used_mb = mem_total_mb - mem_available_mb
+        
+        return {
+            'total_mb': round(mem_total_mb, 2),
+            'used_mb': round(mem_used_mb, 2),
+            'available_mb': round(mem_available_mb, 2),
+            'percent': round((mem_used_mb / mem_total_mb) * 100, 1)
+        }
     except Exception as e:
-        log(f"RAM detection error: {e}")
+        log(f"RAM info error: {e}")
+        return None
+
+def get_cpu_usage_accurate():
+    """
+    Mendapatkan CPU usage yang AKURAT dengan membaca /proc/stat
+    Menggunakan metode sampling untuk mendapatkan usage real-time
+    """
+    try:
+        def read_cpu_stats():
+            """Baca CPU stats dari /proc/stat"""
+            with open('/proc/stat', 'r') as f:
+                line = f.readline()  # Baris pertama adalah total CPU
+                values = line.split()[1:]  # Skip 'cpu' label
+                return [int(x) for x in values]
+        
+        # Baca stats pertama
+        stats1 = read_cpu_stats()
+        time.sleep(0.1)  # Tunggu 100ms
+        stats2 = read_cpu_stats()
+        
+        # Calculate CPU usage
+        # Format: user nice system idle iowait irq softirq steal guest guest_nice
+        idle1 = stats1[3]
+        idle2 = stats2[3]
+        
+        total1 = sum(stats1)
+        total2 = sum(stats2)
+        
+        total_diff = total2 - total1
+        idle_diff = idle2 - idle1
+        
+        if total_diff == 0:
+            return 0.0
+        
+        usage = 100.0 * (total_diff - idle_diff) / total_diff
+        return round(max(0, min(100, usage)), 1)
+        
+    except Exception as e:
+        log(f"CPU usage calculation error: {e}")
+        # Fallback ke method alternatif
+        return get_cpu_usage_fallback()
+
+def get_cpu_usage_fallback():
+    """Fallback method untuk CPU usage"""
+    try:
+        # Method: Parse 'top' command
+        result = subprocess.run(
+            ['top', '-bn1', '-d0.1'],
+            capture_output=True,
+            text=True,
+            timeout=2
+        )
+        
+        lines = result.stdout.split('\n')
+        for line in lines:
+            # Cari baris dengan info CPU
+            if 'Cpu' in line or 'CPU' in line or '%cpu' in line.lower():
+                # Parse berbagai format
+                # Format 1: "%Cpu(s):  2.3 us,  1.0 sy,  0.0 ni, 96.7 id"
+                if 'id' in line:
+                    parts = line.split(',')
+                    for part in parts:
+                        if 'id' in part:
+                            try:
+                                idle_str = part.split()[0].replace('%', '')
+                                idle = float(idle_str)
+                                cpu_usage = 100 - idle
+                                return round(max(0, min(100, cpu_usage)), 1)
+                            except:
+                                pass
+        
+        # Jika tidak berhasil, coba hitung dari load average
+        with open('/proc/loadavg', 'r') as f:
+            load_avg = float(f.read().strip().split()[0])
+            cpu_count = get_cpu_count()
+            # Load average sebagai persentase (approximation)
+            cpu_percent = min(100, (load_avg / cpu_count) * 100)
+            return round(cpu_percent, 1)
+            
+    except Exception as e:
+        log(f"CPU fallback error: {e}")
+        return 0.0
+
+def get_cpu_usage():
+    """Main function untuk mendapatkan CPU usage - IMPROVED"""
+    try:
+        return get_cpu_usage_accurate()
+    except:
         return "N/A"
 
+def get_ram_usage():
+    """Mendapatkan RAM usage dalam persen - BACKWARD COMPATIBLE"""
+    info = get_ram_info()
+    if info:
+        return info['percent']
+    return "N/A"
+
+# =========================
+# WEBHOOK DISCORD
+# =========================
 def send_discord_webhook(webhook_url, title, message, color=None):
     """Kirim pesan ke Discord webhook - IMPROVED VERSION"""
     if not webhook_url or webhook_url == "":
@@ -214,15 +232,30 @@ def send_discord_webhook(webhook_url, title, message, color=None):
         return False
 
 def build_webhook_status_message(pkgs, cfg):
-    """Membuat pesan status untuk webhook - CPU/RAM dihitung di sini (lazy)"""
-    cpu = get_cpu_usage()  # Hanya dipanggil saat webhook
-    ram = get_ram_usage()  # Hanya dipanggil saat webhook
+    """Membuat pesan status untuk webhook - IMPROVED dengan info lengkap"""
+    # Dapatkan info CPU dan RAM yang REAL-TIME
+    cpu_percent = get_cpu_usage()
+    cpu_cores = get_cpu_count()
+    ram_info = get_ram_info()
     
-    # Build message dengan format yang bersih
+    # Build message dengan format yang lebih informatif
     lines = []
     lines.append("**📊 System Status**")
-    lines.append(f"CPU: {cpu}%" if cpu != "N/A" else "CPU: N/A")
-    lines.append(f"RAM: {ram}%" if ram != "N/A" else "RAM: N/A")
+    
+    # CPU Info dengan jumlah cores
+    if cpu_percent != "N/A":
+        lines.append(f"CPU: {cpu_percent}% ({cpu_cores} cores)")
+    else:
+        lines.append(f"CPU: N/A ({cpu_cores} cores)")
+    
+    # RAM Info dengan total GB
+    if ram_info:
+        ram_total_gb = ram_info['total_mb'] / 1024
+        ram_used_gb = ram_info['used_mb'] / 1024
+        lines.append(f"RAM: {ram_info['percent']}% ({ram_used_gb:.2f} GB / {ram_total_gb:.2f} GB)")
+    else:
+        lines.append("RAM: N/A")
+    
     lines.append("")
     lines.append("**👥 Account Status**")
     
@@ -1290,7 +1323,7 @@ def menu():
         print("-" * 40)
         print("T. 🧪 Test Workspace Detection")
         print("W. 📡 Test Webhook")
-        print("C. 🖥️ Test CPU Detection")
+        print("C. 🖥️ Test CPU/RAM Detection")
         print("0. ❌ Exit\n")
         
         c = input("📌 Select: ").strip()
@@ -1354,7 +1387,7 @@ def menu():
                     print(f"{info['username']}: {timestamp}")
                 input("\nPress ENTER...")
         elif c.lower() == "w":
-            # Test webhook
+            # Test webhook - IMPROVED
             clear_screen()
             print("=" * 70)
             print("📡 TEST WEBHOOK")
@@ -1366,9 +1399,26 @@ def menu():
             else:
                 log(f"Testing webhook: {cfg['webhook_url'][:50]}...")
                 
+                # Get real-time stats untuk test
+                cpu_percent = get_cpu_usage()
+                cpu_cores = get_cpu_count()
+                ram_info = get_ram_info()
+                
                 test_message = "**🧪 Test Message**\n"
-                test_message += f"Timestamp: {time.strftime('%Y-%m-%d %H:%M:%S')}\n"
-                test_message += "This is a test webhook from Roblox Manager."
+                test_message += f"Timestamp: {time.strftime('%Y-%m-%d %H:%M:%S')}\n\n"
+                test_message += "**📊 System Info**\n"
+                
+                if cpu_percent != "N/A":
+                    test_message += f"CPU: {cpu_percent}% ({cpu_cores} cores)\n"
+                else:
+                    test_message += f"CPU: N/A ({cpu_cores} cores)\n"
+                
+                if ram_info:
+                    ram_total_gb = ram_info['total_mb'] / 1024
+                    ram_used_gb = ram_info['used_mb'] / 1024
+                    test_message += f"RAM: {ram_info['percent']}% ({ram_used_gb:.2f} GB / {ram_total_gb:.2f} GB)"
+                else:
+                    test_message += "RAM: N/A"
                 
                 result = send_discord_webhook(
                     cfg["webhook_url"],
@@ -1384,22 +1434,41 @@ def menu():
                 
                 input("\nPress ENTER...")
         elif c.lower() == "c":
-            # Test CPU detection
+            # Test CPU/RAM detection - IMPROVED
             clear_screen()
             print("=" * 70)
-            print("🖥️ TEST CPU DETECTION")
+            print("🖥️ TEST CPU & RAM DETECTION")
             print("=" * 70)
             
-            log("Testing CPU detection methods...")
-            cpu = get_cpu_usage()
-            ram = get_ram_usage()
+            log("Testing CPU & RAM detection methods...")
+            log("Collecting data (please wait)...\n")
             
-            print(f"\n📊 Results:")
-            print(f"  CPU: {cpu}%" if cpu != "N/A" else f"  CPU: {cpu} (detection unavailable)")
-            print(f"  RAM: {ram}%" if ram != "N/A" else f"  RAM: {ram} (detection unavailable)")
+            cpu_percent = get_cpu_usage()
+            cpu_cores = get_cpu_count()
+            ram_info = get_ram_info()
             
-            # Try to show Roblox processes
-            print(f"\n🎮 Roblox Processes:")
+            print(f"📊 SYSTEM INFORMATION:")
+            print(f"  CPU Cores: {cpu_cores}")
+            
+            if cpu_percent != "N/A":
+                print(f"  CPU Usage: {cpu_percent}%")
+            else:
+                print(f"  CPU Usage: N/A (detection unavailable)")
+            
+            if ram_info:
+                ram_total_gb = ram_info['total_mb'] / 1024
+                ram_used_gb = ram_info['used_mb'] / 1024
+                ram_available_gb = ram_info['available_mb'] / 1024
+                
+                print(f"\n  RAM Total: {ram_total_gb:.2f} GB ({ram_info['total_mb']:.0f} MB)")
+                print(f"  RAM Used: {ram_used_gb:.2f} GB ({ram_info['used_mb']:.0f} MB)")
+                print(f"  RAM Available: {ram_available_gb:.2f} GB ({ram_info['available_mb']:.0f} MB)")
+                print(f"  RAM Usage: {ram_info['percent']}%")
+            else:
+                print(f"  RAM: Detection failed")
+            
+            # Show Roblox processes
+            print(f"\n🎮 ROBLOX PROCESSES:")
             try:
                 result = subprocess.run(
                     ['pgrep', '-f', 'com.roblox'],
