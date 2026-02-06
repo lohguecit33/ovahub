@@ -1498,7 +1498,7 @@ def menu():
             # Test CPU/RAM detection - IMPROVED
             clear_screen()
             print("=" * 70)
-            print("🖥️ TEST CPU & RAM DETECTION")
+            print("🖥️ TEST CPU & RAM DETECTION ")
             print("=" * 70)
             
             log("Testing CPU & RAM detection methods...")
