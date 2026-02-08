@@ -1345,20 +1345,20 @@ def monitor():
             for pkg, info in pkgs.items():
                 status = check_workspace_status(pkg, info, cfg)
 
-                    if status in ("waiting", "online"):
-                        continue
+                if status in ("waiting", "online"):
+                    continue
 
-                    if status in ("kill", "timeout", "offline"):
-                        log(f"{username}: {status.upper()} → LAUNCH ULANG")
+                if status in ("kill", "timeout", "offline"):
+                    log(f"{username}: {status.upper()} → LAUNCH ULANG")
 
-                        time.sleep(cfg["restart_delay"])
-                        start_app(pkg, cfg["game_id"])
-                        time.sleep(cfg["startup_delay"])
+                    time.sleep(cfg["restart_delay"])
+                    start_app(pkg, cfg["game_id"])
+                    time.sleep(cfg["startup_delay"])
 
-                        # reset state
-                        last_launch_time[pkg] = time.time()
-                        last_online_time.pop(pkg, None)
-                        last_workspace_time.pop(pkg, None)
+                    # reset state
+                    last_launch_time[pkg] = time.time()
+                    last_online_time.pop(pkg, None)
+                    last_workspace_time.pop(pkg, None)
 
             # Cek webhook interval
             current_time = time.time()
@@ -1415,18 +1415,18 @@ def monitor():
         input("Press ENTER...")
     finally:
         monitor_active = False
-        
+
 # =========================
 # MENU
 # =========================
-def menu():
+def menu():s
     while True:
         clear_screen()
         cfg = load_config()
         pkgs = load_packages()
         
         print("=" * 70)
-        print("🤖 ROBLOX MULTI-PACKAGE MANAGER (Termux/Cloudphone)")
+        print("🤖 ROBLOX OVA (Termux/Cloudphone)")
         print("=" * 70)
         print(f"🎮 Game ID : {cfg.get('game_id', 'Not set')}")
         print(f"📦 Packages: {len(pkgs)}")
