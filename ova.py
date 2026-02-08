@@ -1419,14 +1419,14 @@ def monitor():
 # =========================
 # MENU
 # =========================
-def menu():s
+def menu():
     while True:
         clear_screen()
         cfg = load_config()
         pkgs = load_packages()
         
         print("=" * 70)
-        print("🤖 ROBLOX OVA (Termux/Cloudphone)")
+        print("🤖 ROBLOX ova (Termux/Cloudphone)")
         print("=" * 70)
         print(f"🎮 Game ID : {cfg.get('game_id', 'Not set')}")
         print(f"📦 Packages: {len(pkgs)}")
