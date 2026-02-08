@@ -1122,7 +1122,6 @@ def sequential_startup(pkgs, cfg):
         if is_app_running(pkg):
             log(f"Stopping existing instance: {info['username']}")
             stop_app(pkg)
-        last_launch_time.pop(pkg, None)
 
     # Tunggu sebentar setelah stop semua
     log("Waiting after stopping all...")
