@@ -1191,14 +1191,13 @@ def monitor():
 
     # Webhook startup jika enabled
     if cfg.get("webhook_enabled") and cfg.get("webhook_url"):
-        try:
-            message = build_webhook_status_message(pkgs, cfg)
-            send_discord_webhook(
-                cfg["webhook_url"],
-                "🚀 Monitor Started",
-                message,
-                3066993
-            )
+        message = build_webhook_status_message(pkgs, cfg)
+        send_discord_webhook(
+            cfg["webhook_url"],
+            "🚀 Monitor Started",
+            message,
+            3066993
+        )
 
     try:
         cycle_count = 0
@@ -1266,16 +1265,12 @@ def monitor():
                     add_log("⏰ Auto restart time reached")
                     
                     if cfg.get("webhook_enabled", False) and cfg.get("webhook_url", ""):
-                        try:
-                            from webhook import send_discord_webhook
-                            send_discord_webhook(
-                                cfg["webhook_url"],
-                                "🔄 Auto Restart",
-                                "Restarting all Roblox packages...",
-                                16776960
-                            )
-                        except:
-                            pass
+                        send_discord_webhook(
+                            cfg["webhook_url"],
+                            "🔄 Auto Restart",
+                            "Restarting all Roblox packages...",
+                            16776960
+                        )
                     
                     restart_all_roblox(pkgs, cfg)
                     last_restart_time = current_time
@@ -1286,16 +1281,12 @@ def monitor():
         add_log(f"Monitor error: {e}")
         
         if cfg.get("webhook_enabled", False) and cfg.get("webhook_url", ""):
-            try:
-                from webhook import send_discord_webhook
-                send_discord_webhook(
-                    cfg["webhook_url"],
-                    "❌ Monitor Error",
-                    f"Error occurred: {str(e)}",
-                    16711680
-                )
-            except:
-                pass
+            send_discord_webhook(
+                cfg["webhook_url"],
+                "❌ Monitor Error",
+                f"Error occurred: {str(e)}",
+                16711680
+            )
         
         input("Press ENTER...")
     finally:
